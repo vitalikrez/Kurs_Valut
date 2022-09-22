@@ -1,5 +1,10 @@
 <div class="comboBox">
-    <input type="text" class="input" placeholder="виберіть валюту" [(ngModel)]="inputItem">
+    
+    <h3>{{name}}</h3>
+    
+    <input type="text" class="input" placeholder="виберіть валюту" 
+    [(ngModel)]="inputItem"
+    (focus)="listHovaemo=false" >
 
 
     <div class="option" *ngIf="!listHovaemo">

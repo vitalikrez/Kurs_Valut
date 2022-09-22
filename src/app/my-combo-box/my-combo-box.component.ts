@@ -1,5 +1,5 @@
-import { Component, OnInit, Input} from '@angular/core';
-import { ITEMS } from '../valuty';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { getRate, ITEMS } from '../valuty';
 
 @Component({
   selector: 'app-my-combo-box',
@@ -13,16 +13,20 @@ export class MyComboBoxComponent implements OnInit {
   itemList: string[] = ITEMS;
   selectedIndex: number=-1;
 
+  @Input() name:string="";
+
   @Input() list: string[]=[];
 
-  listHovaemo:boolean=false;
+  @Output() onItemSelected = new EventEmitter<string>();
+
+  listHovaemo:boolean=true;
 
   selectItem(index:number):void{
     this.selectedIndex = index;
     this.inputItem = this.itemList[index];
-    //this.listHovaemo = true;
+    this.listHovaemo = true;
+    this.onItemSelected.emit(this.itemList[index]);
   }
-
 
   constructor() { }
 

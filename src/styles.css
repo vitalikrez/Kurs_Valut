@@ -9,6 +9,16 @@
     padding: 10px;
 }
 
+.wrapper2 {
+    display: flex;
+
+}
+
+.wrapper2>div {
+    flex: 1;
+    padding: 10px;
+}
+
 .mainDiv {
     margin: 0.5em;
     padding: 0.5em;

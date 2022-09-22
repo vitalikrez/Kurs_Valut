@@ -1,23 +1,34 @@
 <div class="wrapper">
-  <div class="box1">One
+  <div class="box1">
+    Виберіть валюту:
+    <div class="wrapper2">
+      <p></p>
+      <div class="box4">
+        <app-my-combo-box (onItemSelected)="setFrom($event)" [name]="'from'"></app-my-combo-box>
+      </div>
+      <div class="box5">
+        <app-my-combo-box (onItemSelected)="setTo($event)" [name]="'to'"></app-my-combo-box>
+      </div>
+    </div>
+  </div>
 
-    <p *ngIf="rezult>0">{{rezult}}</p>
+  <div class="box2">
+    Сума:
+
     <form #selectedForm="ngForm">
-      <app-my-combo-box></app-my-combo-box>
 
-      <p>40 грн. за 1$</p>
-      <p>Введіть суму</p>
-
+      <p *ngIf="from != '' && to != '' && kurs >0"><b>Курс з {{from}} на {{to}} = {{kurs}}</b></p>
+      <p>Введіть суму:</p>
       <input type="number" class="form-control" id="name" name="name" [(ngModel)]="val1_input">
       <input type="submit" value=" Розрахувати" (click)="onClick()" />
-
     </form>
+    <p></p>
+    <input type="submit" value="Test GET" (click)="testAPI()" />
 
 
   </div>
-  <div class="box2">
-
-
-    Two
+  <div class="box3">
+    Результат:
+    <p *ngIf="rezult>0">{{rezult}}</p>
   </div>
 </div>

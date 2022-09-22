@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { FixerCurrencyAPIService } from './fixer-currency-api.service';
+import { RezultAPI } from './rezultAPI';
+import { getRate } from './valuty';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +12,27 @@ export class AppComponent {
 
   rezult: number = -1;
   val1_input: number=0;
-  kurs: number=40;
+  kurs!: number;
+
+  
+    from:string="";
+    to:string="";
+
+      setFrom(from:string):void{
+            this.from = from;
+            this.kurs=getRate(this.from, this.to);
+            this.rezult = -1;
+            this.onClick();
+      }
+
+      setTo(to:string):void{
+            this.to = to;
+            this.kurs=getRate(this.from, this.to);
+            this.rezult = -1;
+            this.onClick();
+
+      }
+
 
   onClick():void{
 
@@ -17,5 +40,16 @@ export class AppComponent {
 
   }
 
+  testAPI(){
+    
+    let tmp:RezultAPI=this.rezAPI.Convert("123", "123", 5);
+    this.kurs = tmp.rate;
+    this.rezult = tmp.rezult;       
+  }
+
+  constructor(private rezAPI:FixerCurrencyAPIService) { }
+
+
   title = 'Kurs_Valut';
+  
 }
