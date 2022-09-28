@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FixerCurrencyAPIService } from './fixer-currency-api.service';
-import { RezultAPI } from './rezultAPI';
 import { getRate } from './valuty';
 
 @Component({
@@ -30,24 +29,24 @@ export class AppComponent {
             this.kurs=getRate(this.from, this.to);
             this.rezult = -1;
             this.onClick();
-
       }
 
-
   onClick():void{
-
-    this.rezult = this.val1_input*this.kurs;
-
+    //this.rezult = this.val1_input*this.kurs;
+        if(this.from != '' && this.to != '' && this.val1_input)  {
+      this.serviceAPI.getConvert(this.from, this.to, this.val1_input);  
+    }
   }
 
-  testAPI(){
-    
-    let tmp:RezultAPI=this.rezAPI.Convert("123", "123", 5);
-    this.kurs = tmp.rate;
-    this.rezult = tmp.rezult;       
+  testAPI(){    
+    //this.serviceAPI.getConvert("USD", "UAH",  5);  
+    if(this.from != '' && this.to != '' && this.val1_input)  {
+      this.serviceAPI.getConvert(this.from, this.to, this.val1_input);  
+    }
   }
 
-  constructor(private rezAPI:FixerCurrencyAPIService) { }
+
+  constructor(public serviceAPI:FixerCurrencyAPIService) { }
 
 
   title = 'Kurs_Valut';

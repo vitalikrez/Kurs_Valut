@@ -1,17 +1,19 @@
 <div class="comboBox">
-    
+
     <h3>{{name}}</h3>
-    
-    <input type="text" class="input" placeholder="виберіть валюту" 
-    [(ngModel)]="inputItem"
-    (focus)="listHovaemo=false" >
+
+    <div style="border: 1px solid black;">
+        <input type="text" class="input" style="width: 96.599%" placeholder="виберіть валюту" (change)="onChange()"
+            [(ngModel)]="inputItem" (focus)="listHovaemo=false">
 
 
-    <div class="option" *ngIf="!listHovaemo">
-        <list-item *ngFor=" let item of itemList; let i = index" [ngClass]="{'selected': selectedIndex == i}"
-            (click)="selectItem(i)">
-            <p>{{item}}</p>
-        </list-item>
+        <div class="option" *ngIf="!listHovaemo && serviceAPI.symbols">
 
+            <list-item *ngFor=" let item of serviceAPI.symbols; let i = index"
+                [ngClass]="{'selected': selectedIndex == i}" (click)="selectItem(i)">
+                <p>{{item}}</p>
+            </list-item>
+
+        </div>
     </div>
 </div>

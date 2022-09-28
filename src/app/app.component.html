@@ -17,18 +17,19 @@
 
     <form #selectedForm="ngForm">
 
-      <p *ngIf="from != '' && to != '' && kurs >0"><b>Курс з {{from}} на {{to}} = {{kurs}}</b></p>
+      <p *ngIf="from != '' && to != '' && serviceAPI.convert"><b>Курс {{from}} - {{to}} становить: {{serviceAPI.convert.info.rate}}</b></p>
       <p>Введіть суму:</p>
       <input type="number" class="form-control" id="name" name="name" [(ngModel)]="val1_input">
       <input type="submit" value=" Розрахувати" (click)="onClick()" />
     </form>
     <p></p>
-    <input type="submit" value="Test GET" (click)="testAPI()" />
+
+    <!-- <input type="submit" value="Test GET" (click)="testAPI()" /> -->
 
 
   </div>
   <div class="box3">
     Результат:
-    <p *ngIf="rezult>0">{{rezult}}</p>
+    <p *ngIf="serviceAPI.convert">{{serviceAPI.convert.result}}</p>
   </div>
 </div>

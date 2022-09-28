@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { getRate, ITEMS } from '../valuty';
+import { FixerCurrencyAPIService } from '../fixer-currency-api.service';
+
 
 @Component({
   selector: 'app-my-combo-box',
@@ -23,14 +25,25 @@ export class MyComboBoxComponent implements OnInit {
 
   selectItem(index:number):void{
     this.selectedIndex = index;
-    this.inputItem = this.itemList[index];
+    this.inputItem = this.serviceAPI.symbols[index];
     this.listHovaemo = true;
-    this.onItemSelected.emit(this.itemList[index]);
+    this.onItemSelected.emit(this.serviceAPI.symbols[index]);
   }
 
-  constructor() { }
+  constructor(public serviceAPI:FixerCurrencyAPIService) { }
 
   ngOnInit(): void {
+
+    this.serviceAPI.getSymbols();
+
   }
+
+  onChange(): void {
+
+    let test = this.serviceAPI.symbols.indexOf(this.inputItem);
+    if (test)
+      this.selectItem(test);
+    }
+  
 
 }
